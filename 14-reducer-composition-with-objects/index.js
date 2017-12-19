@@ -7,6 +7,7 @@ const todo = (state, action) => {
             completed: false,
         };
     case 'TOGGLE_TODO':
+        console.log(state.id, action.id)
         if (state.id !== action.id) {
             return state;
         }
@@ -72,7 +73,7 @@ console.log('--------------');
 console.log('Dispatching ADD_TODO');
 store.dispatch({
     type: 'ADD_TODO',
-    id: 0,
+    id: 1,
     text: 'Go shopping',
 });
 console.log('Curent state:');
