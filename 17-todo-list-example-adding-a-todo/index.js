@@ -43,21 +43,32 @@ const { createStore } = Redux;
 const store = createStore(todoApp);
 // view
 
-const FilterLink = ({ filter, children }) => (
-    <a
-        href="#"
-        onClick={(e) => {
-            e.preventDefault();
-            store.dispatch({
-                type: 'SET_VISIBILITY_FILTER',
-                filter,
-            });
-        }}
-
-    >
-        {children}
-    </a>
-);
+const FilterLink = ({
+    filter,
+    currentFilter,
+    children,
+}) => {
+    console.log(currentFilter, filter);
+    if (currentFilter === filter) {
+        return (
+            <span>{children}</span>
+        );
+    }
+    return (
+        <a
+            href="#"
+            onClick={(e) => {
+                e.preventDefault();
+                store.dispatch({
+                    type: 'SET_VISIBILITY_FILTER',
+                    filter,
+                });
+            }}
+        >
+            {children}
+        </a>
+    );
+};
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {
     case 'SHOW_ALL':
@@ -71,6 +82,7 @@ const getVisibleTodos = (todos, filter) => {
 let nextTodoId = 0;
 class TodoApp extends React.Component {
     render() {
+        const { visibilityFilter } = this.props;
         const visiableTodos = getVisibleTodos(this.props.todos, this.props.visibilityFilter);
         return (
             <div>
@@ -117,18 +129,21 @@ class TodoApp extends React.Component {
                     {' '}
                     <FilterLink
                         filter="SHOW_ALL"
+                        currentFilter={visibilityFilter}
                     >
                         All
                     </FilterLink>
                     {' '}
                     <FilterLink
                         filter="SHOW_ACTIVE"
+                        currentFilter={visibilityFilter}
                     >
                         Active
                     </FilterLink>
                     {' '}
                     <FilterLink
                         filter="SHOW_COMPLETED"
+                        currentFilter={visibilityFilter}
                     >
                         Completed
                     </FilterLink>
