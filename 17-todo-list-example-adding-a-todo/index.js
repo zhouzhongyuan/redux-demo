@@ -5,7 +5,7 @@ const todos = (state = [], action) => {
         return ([
             ...state,
             {
-                id: 1,
+                id: action.id,
                 text: action.text,
                 completed: false,
             },
@@ -17,9 +17,8 @@ const todos = (state = [], action) => {
 // store
 const { createStore } = Redux;
 const store = createStore(todos);
-
 // view
-
+let nextTodoId = 0;
 class TodoApp extends React.Component {
     render() {
         return (
@@ -29,18 +28,22 @@ class TodoApp extends React.Component {
                         () => {
                             store.dispatch({
                                 type: 'ADD_TODO',
-                                id: 1,
-                                text: 'Go shopping',
+                                id: nextTodoId++,
+                                text: 'Test',
                             });
                         }
                     }
                 >
-                    Add
+                    Add Todo
                 </button>
                 <ul>
                     {
                         this.props.todos.map(todo => (
-                            <li>{todo.text}</li>
+                            <li
+                                key={todo.id}
+                            >
+                                {todo.text}
+                            </li>
                         ))
                     }
                 </ul>
