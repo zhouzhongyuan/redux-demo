@@ -43,12 +43,42 @@ const { createStore } = Redux;
 const store = createStore(todoApp);
 // view
 
+const Todo = ({
+    onClick,
+    completed,
+    text,
+}) => (
+    <li
+        key={todo.id}
+        onClick={onClick}
+        style={{
+            textDecoration: completed ? 'line-through' : 'none',
+        }}
+    >
+        {text}
+    </li>
+);
+
+const TodoList = ({
+    todos,
+    onTodoClick,
+
+}) => (
+    <ul>
+        {todos.map(todo => (
+            <Todo
+                onClick={() => onTodoClick(todo.id)}
+                completed={todo.completed}
+                text={todo.text}
+            />
+        ))}
+    </ul>
+);
 const FilterLink = ({
     filter,
     currentFilter,
     children,
 }) => {
-    console.log(currentFilter, filter);
     if (currentFilter === filter) {
         return (
             <span>{children}</span>
@@ -104,26 +134,16 @@ class TodoApp extends React.Component {
                 >
                     Add Todo
                 </button>
-                <ul>
-                    {
-                        visiableTodos.map(todo => (
-                            <li
-                                key={todo.id}
-                                onClick={() => {
-                                    store.dispatch({
-                                        type: 'TOGGLE_TODO',
-                                        id: todo.id,
-                                    });
-                                }}
-                                style={{
-                                    textDecoration: todo.completed ? 'line-through' : 'none',
-                                }}
-                            >
-                                {todo.text}
-                            </li>
-                        ))
-                    }
-                </ul>
+                <TodoList
+                    todos={visiableTodos}
+                    onTodoClick={(id) => {
+                        store.dispatch({
+                            type: 'TOGGLE_TODO',
+                            id,
+                        });
+                    }}
+
+                />
                 <p>
                     Show:
                     {' '}
