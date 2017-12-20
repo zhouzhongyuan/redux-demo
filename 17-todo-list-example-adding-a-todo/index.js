@@ -66,9 +66,9 @@ const TodoList = ({
     <ul>
         {todos.map(todo => (
             <Todo
+                key={todo.id}
+                {...todo}
                 onClick={() => onTodoClick(todo.id)}
-                completed={todo.completed}
-                text={todo.text}
             />
         ))}
     </ul>
@@ -85,7 +85,10 @@ const AddTodo = ({
                 ref={(node) => { input = node; }}
             />
             <button
-                onClick={() => onAddTodoClick(input)}
+                onClick={() => {
+                    onAddTodoClick(input.value);
+                    input.value = '';
+                }}
             >
                 Add Todo
             </button>
@@ -168,13 +171,12 @@ const TodoApp = ({
 }) => (
     <div>
         <AddTodo
-            onAddTodoClick={(input) => {
+            onAddTodoClick={(value) => {
                 store.dispatch({
                     type: 'ADD_TODO',
                     id: nextTodoId++,
-                    text: input.value,
+                    text: value,
                 });
-                input.value = '';
             }}
         />
         <TodoList
