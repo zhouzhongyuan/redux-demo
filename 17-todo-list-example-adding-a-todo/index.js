@@ -120,6 +120,14 @@ const Link = ({
 };
 
 class FilterLink extends React.Component {
+    componentDidMount() {
+        this.unsubscribe = store.subscribe(() => {
+            this.forceUpdate();
+        });
+    }
+    compoenetWillUnmount() {
+        this.unsubscribe();
+    }
     render() {
         const props = this.props;
         const state = store.getState();
