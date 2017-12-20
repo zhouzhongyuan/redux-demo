@@ -42,14 +42,13 @@ const todoApp = combineReducers({
 const { createStore } = Redux;
 const store = createStore(todoApp);
 // view
-
+let nextTodoId = 0;
 const Todo = ({
     onClick,
     completed,
     text,
 }) => (
     <li
-        key={todo.id}
         onClick={onClick}
         style={{
             textDecoration: completed ? 'line-through' : 'none',
@@ -74,6 +73,25 @@ const TodoList = ({
         ))}
     </ul>
 );
+
+const AddTodo = ({
+    onAddTodoClick,
+}) => {
+    let input;
+    return (
+        <div>
+            <input
+                type="text"
+                ref={(node) => { input = node; }}
+            />
+            <button
+                onClick={() => onAddTodoClick(input)}
+            >
+                Add Todo
+            </button>
+        </div>
+    );
+};
 const FilterLink = ({
     filter,
     currentFilter,
@@ -109,31 +127,22 @@ const getVisibleTodos = (todos, filter) => {
         return todos.filter(t => !t.completed);
     }
 };
-let nextTodoId = 0;
 class TodoApp extends React.Component {
     render() {
         const { visibilityFilter } = this.props;
         const visiableTodos = getVisibleTodos(this.props.todos, this.props.visibilityFilter);
         return (
             <div>
-                <input
-                    type="text"
-                    ref={(node) => { this.input = node; }}
+                <AddTodo
+                    onAddTodoClick={(input) => {
+                        store.dispatch({
+                            type: 'ADD_TODO',
+                            id: nextTodoId++,
+                            text: input.value,
+                        });
+                        input.value = '';
+                    }}
                 />
-                <button
-                    onClick={
-                        () => {
-                            store.dispatch({
-                                type: 'ADD_TODO',
-                                id: nextTodoId++,
-                                text: this.input.value,
-                            });
-                            this.input.value = '';
-                        }
-                    }
-                >
-                    Add Todo
-                </button>
                 <TodoList
                     todos={visiableTodos}
                     onTodoClick={(id) => {
