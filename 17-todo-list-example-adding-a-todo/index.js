@@ -25,13 +25,53 @@ const todos = (state = [], action) => {
         return state;
     }
 };
+const visibilityFilter = (state = 'SHOW_ALL', action) => {
+    switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+        return action.filter;
+    default:
+        return state;
+    }
+};
+const { combineReducers } = Redux;
+const todoApp = combineReducers({
+    todos,
+    visibilityFilter,
+});
 // store
 const { createStore } = Redux;
-const store = createStore(todos);
+const store = createStore(todoApp);
 // view
+
+const FilterLink = ({ filter, children }) => (
+    <a
+        href="#"
+        onClick={(e) => {
+            e.preventDefault();
+            store.dispatch({
+                type: 'SET_VISIBILITY_FILTER',
+                filter,
+            });
+        }}
+
+    >
+        {children}
+    </a>
+);
+const getVisibleTodos = (todos, filter) => {
+    switch (filter) {
+    case 'SHOW_ALL':
+        return todos;
+    case 'SHOW_COMPLETED':
+        return todos.filter(t => t.completed);
+    case 'SHOW_ACTIVE':
+        return todos.filter(t => !t.completed);
+    }
+};
 let nextTodoId = 0;
 class TodoApp extends React.Component {
     render() {
+        const visiableTodos = getVisibleTodos(this.props.todos, this.props.visibilityFilter);
         return (
             <div>
                 <input
@@ -54,7 +94,7 @@ class TodoApp extends React.Component {
                 </button>
                 <ul>
                     {
-                        this.props.todos.map(todo => (
+                        visiableTodos.map(todo => (
                             <li
                                 key={todo.id}
                                 onClick={() => {
@@ -72,6 +112,29 @@ class TodoApp extends React.Component {
                         ))
                     }
                 </ul>
+                <p>
+                    Show:
+                    {' '}
+                    <FilterLink
+                        filter="SHOW_ALL"
+                    >
+                        All
+                    </FilterLink>
+                    {' '}
+                    <FilterLink
+                        filter="SHOW_ACTIVE"
+                    >
+                        Active
+                    </FilterLink>
+                    {' '}
+                    <FilterLink
+                        filter="SHOW_COMPLETED"
+                    >
+                        Completed
+                    </FilterLink>
+
+                </p>
+
             </div>
         );
     }
@@ -80,7 +143,7 @@ class TodoApp extends React.Component {
 const render = () => {
     ReactDOM.render(
         <TodoApp
-            todos={store.getState()}
+            {...store.getState()}
         />,
         document.getElementById('root'),
     );
