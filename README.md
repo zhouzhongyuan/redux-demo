@@ -38,3 +38,8 @@ class FilterLink extends React.Component {
     }
 }
 ```
+
+23 删除了`store.subscribe(render);`
+为什么可以删除？
+因为已经在`VisibleTodoList` 和 `FilterLink` 中添加了`subscribe`，不需要重复subscribe了
+好处：`AddTodo`永远不会有多余的渲染
