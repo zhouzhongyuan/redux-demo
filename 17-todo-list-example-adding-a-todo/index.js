@@ -98,8 +98,8 @@ let AddTodo = ({ dispatch }) => {
 };
 
 AddTodo = connect(
-    state => ({}),
-    dispatch => ({ dispatch }),
+    null,
+    null,
 )(AddTodo);
 
 const Link = ({

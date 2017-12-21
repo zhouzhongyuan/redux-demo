@@ -60,3 +60,7 @@ class FilterLink extends React.Component {
 27 
 - `mapStateToProps`: Take the **state** and return the **props** that need to pass through the presentation component
 - `mapDispatchToProps`: Accept the **dispatch** method as the only argument and return the **props** method that the presentation will call
+
+28 
+如果不需要把state通过props传递下去，那么`mapStateToProps`可以省略
+如果`mapDispatchToProps`只是传递了`dispatch`，`mapDispatchToProps`可以省略。（API就是这么设计的）
