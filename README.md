@@ -3,7 +3,7 @@
 - [Getting Started with Redux](https://egghead.io/courses/getting-started-with-redux)
 
 13, 14, 15 reducer composition 
-
+13, reducer可以嵌套
 22, 
 Dan说
 > 对于FilterLink来说，如果
@@ -56,3 +56,7 @@ class FilterLink extends React.Component {
     - **global variable** is bad idea
     - UNLESS you use **it** for dependency injection(依赖注入，也可以说控制反转Inverse of Control)
 26 只是介绍了react-redux 提供了Provider，没实质内容
+
+27 
+- `mapStateToProps`: Take the **state** and return the **props** that need to pass through the presentation component
+- `mapDispatchToProps`: Accept the **dispatch** method as the only argument and return the **props** method that the presentation will call
