@@ -122,38 +122,17 @@ const Link = ({
     );
 };
 
-class FilterLink extends React.Component {
-    componentDidMount() {
-        const { store } = this.context;
-        this.unsubscribe = store.subscribe(() => {
-            this.forceUpdate();
-        });
-    }
-    compoenetWillUnmount() {
-        this.unsubscribe();
-    }
-    render() {
-        const props = this.props;
-        const { store } = this.context;
-        const state = store.getState();
-        return (
-            <Link
-                active={
-                    props.filter === state.visibilityFilter
-                }
-                onClick={filter => store.dispatch({
-                    type: 'SET_VISIBILITY_FILTER',
-                    filter: props.filter,
-                })}
-            >
-                {props.children}
-            </Link>
-        );
-    }
-}
-FilterLink.contextTypes = {
-    store: React.PropTypes.object,
-};
+const mapStateToLinkProps = (state, ownProps) => ({
+    active: ownProps.filter === state.visibilityFilter,
+});
+
+const mapDispatchToLinkProps = (dispatch, ownProps) => ({
+    onClick: filter => dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: ownProps.filter,
+    }),
+});
+const FilterLink = connect(mapStateToLinkProps, mapDispatchToLinkProps)(Link);
 const Footer = () => (
     <p>
             Show:
