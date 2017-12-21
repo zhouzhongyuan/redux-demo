@@ -43,3 +43,15 @@ class FilterLink extends React.Component {
 为什么可以删除？
 因为已经在`VisibleTodoList` 和 `FilterLink` 中添加了`subscribe`，不需要重复subscribe了
 好处：`AddTodo`永远不会有多余的渲染
+
+
+24 store 由全局变量的形式 转为了 store通过props传递
+
+25 
+- implementing Provider from scratch
+- 减少了props的层层传递(相对于24)
+- 在写context的时候，contextTypes是必须的
+- context的使用，违反了react的设计哲学， 
+    - context providers **global variable** to the component tree,
+    - **global variable** is bad idea
+    - UNLESS you use **it** for dependency injection(依赖注入，也可以说控制反转Inverse of Control)
