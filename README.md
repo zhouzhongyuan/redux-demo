@@ -55,3 +55,4 @@ class FilterLink extends React.Component {
     - context providers **global variable** to the component tree,
     - **global variable** is bad idea
     - UNLESS you use **it** for dependency injection(依赖注入，也可以说控制反转Inverse of Control)
+26 只是介绍了react-redux 提供了Provider，没实质内容
