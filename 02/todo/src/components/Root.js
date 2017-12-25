@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
+import { Router, Route, browserHistory } from 'react-router';
 import App from './App';
 
 const Root = ({ store }) => (
@@ -8,7 +9,9 @@ const Root = ({ store }) => (
         <Provider
             store={store}
         >
-            <App />
+            <Router history={browserHistory}>
+                <Route path="/" component={App} />
+            </Router>
         </Provider>
     </AppContainer>
 );
