@@ -60,3 +60,19 @@ allIds is array of `ids` rather than array of `todos`.
 Update the selector that rely on it.
 
 todos成为了一个对象，包含`allIds`和`byId`
+
+12 添加函数`addLoggingToDispatch`
+有两点很巧妙
+- 1
+```javascript
+const rawDidpatch = store.dispatch;
+if (!console.group) {
+    return rawDidpatch;
+}
+```
+- 2
+```javascript
+const returnValue = rawDidpatch(action);
+return returnValue;
+```
+Dan写代码水平高！
