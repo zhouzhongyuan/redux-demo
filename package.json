@@ -4,7 +4,10 @@
   "description": "- [Getting Started with Redux](https://egghead.io/courses/getting-started-with-redux)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:eslint": "eslint --ignore-path .gitignore",
+    "lint:js": "npm run lint:eslint -- ./02/todo/src",
+    "lint": "npm run lint:js"
   },
   "repository": {
     "type": "git",

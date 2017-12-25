@@ -5,6 +5,7 @@ const Todo = ({
     completed,
     text,
 }) => (
+    // eslint-disable-next-line
     <li
         onClick={onClick}
         style={{

@@ -28,7 +28,7 @@ const mapStateToProps = (state, { params }) => {
         filter,
     };
 };
-
+// eslint-disable-next-line
 VisibleTodoList = withRouter(connect(mapStateToProps, {
     onTodoClick: toggleTodo,
 })(VisibleTodoList));
