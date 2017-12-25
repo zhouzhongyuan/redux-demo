@@ -10,7 +10,8 @@
     "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0}],
     "max-len":["error", 120],
     "react/prop-types": "off",
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "jsx-a11y/anchor-is-valid": ["error", { "aspects": "noHref" }]
   },
   "env": {
     "browser": true
