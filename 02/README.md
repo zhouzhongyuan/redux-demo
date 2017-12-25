@@ -39,3 +39,24 @@ Based on [Building React Applications with Idiomatic Redux](https://egghead.io/c
 
 - 介绍了selector的概念。reducer中的其他函数。例如`todos.js`的`getVisibleTodos`
 - 更好的分离代码
+
+11 refactoring state shape(难，难，难)
+
+背景(Why I treat my state as a database?)
+- There may be more than a single array in real app
+- todos with the same IDs in different arrays might get out of the think
+
+keep todos in an object indexed by the IDs of the todos.
+
+- Rename the reducer to `byId`,
+- rather than add a new item at the end or map over every item,
+- now it's going to change the value in the lookup table.
+
+I want to return a new lookup table  
+
+
+allIds is array of `ids` rather than array of `todos`.
+
+Update the selector that rely on it.
+
+todos成为了一个对象，包含`allIds`和`byId`
