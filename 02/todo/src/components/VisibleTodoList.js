@@ -6,7 +6,7 @@ import { toggleTodo } from '../actions';
 import { getVisibleTodos } from '../reducers';
 import { fetchTodos } from '../api';
 
-class VisibleTodoList extends Component { //elsint-disable
+class VisibleTodoList extends Component { // elsint-disable
     componentDidMount() {
         fetchTodos(this.props.filter).then((todos) => {
             console.log(todos);
