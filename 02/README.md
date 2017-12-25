@@ -34,3 +34,8 @@ Based on [Building React Applications with Idiomatic Redux](https://egghead.io/c
 09 Using mapDispatchToProps() Shorthand Notation
 
 简写`mapDispatchToProps`，没啥新东西
+
+10 selector
+
+- 介绍了selector的概念。reducer中的其他函数。例如`todos.js`的`getVisibleTodos`
+- 更好的分离代码
