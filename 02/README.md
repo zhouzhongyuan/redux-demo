@@ -30,3 +30,7 @@ Based on [Building React Applications with Idiomatic Redux](https://egghead.io/c
 08 Using withRouter()
 
 - 07的代码是有点不合理的：`App.js`中写了`filter={params.filter || 'all'}`，但是`App`本身不用`filter`。应当把`filter`相关代码写在真正用的地方`VisibleTodoList.js`
+
+09 Using mapDispatchToProps() Shorthand Notation
+
+简写`mapDispatchToProps`，没啥新东西
