@@ -11,8 +11,9 @@ Based on [Building React Applications with Idiomatic Redux](https://egghead.io/c
 03 数据持久化
 
     - localStorage 持久化 
-    - lodash.throttle 防止过于频繁的保存数据
+    - lodash.throttle 防止过于频繁的保存数据(因为stringify is expensive)
     - uuid 保证id的唯一性
+   
 
 04 重构createStore及相关代码（Refactoring the Entry Point）
 
