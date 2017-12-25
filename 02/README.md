@@ -26,3 +26,7 @@ Based on [Building React Applications with Idiomatic Redux](https://egghead.io/c
 - 删除了visibilityFilter(reducer)
 - getVisibleTodos的第二个参数由visibilityFilter改为ownProps.filter, filter由`App`而来, `App`中的`filter`由react-router传进来
 - webpackDevServer historyApiFallback true
+
+08 Using withRouter()
+
+- 07的代码是有点不合理的：`App.js`中写了`filter={params.filter || 'all'}`，但是`App`本身不用`filter`。应当把`filter`相关代码写在真正用的地方`VisibleTodoList.js`
