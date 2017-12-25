@@ -76,3 +76,5 @@ const returnValue = rawDidpatch(action);
 return returnValue;
 ```
 Dan写代码水平高！
+
+13 删除localStorage相关代码，添加fake backend
