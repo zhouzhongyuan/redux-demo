@@ -1,40 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { AppContainer } from 'react-hot-loader';
-import throttle from 'lodash/throttle';
+import Root from './components/Root';
+import configStore from './configStore';
 
-import TodoApp from './components/App';
-import todoApp from './reducers';
-import { loadState, saveState } from './localStorage';
-
-const persistedState = loadState();
-const store = createStore(
-    todoApp,
-    persistedState,
+const store = configStore();
+ReactDOM.render(
+    <Root store={store} />,
+    document.getElementById('root'),
 );
-store.subscribe(throttle(() => {
-    saveState({
-        todos: store.getState().todos,
-    });
-}), 1000);
-const render = (Component) => {
-    ReactDOM.render(
-        <AppContainer>
-            <Provider
-                store={store}
-            >
-                <Component />
-            </Provider>
-        </AppContainer>,
-        document.getElementById('root'),
-    );
-};
 
-render(TodoApp);
-
-// Webpack Hot Module Replacement API
-if (module.hot) {
-    module.hot.accept();
-}
