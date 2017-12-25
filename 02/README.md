@@ -20,3 +20,9 @@ Based on [Building React Applications with Idiomatic Redux](https://egghead.io/c
 05 引入react-router
 
 06 引入Link
+
+07 Filtering Redux State with React Router Params(必须使用react-router@2,其他版本都会出点小问题)
+
+- 删除了visibilityFilter(reducer)
+- getVisibleTodos的第二个参数由visibilityFilter改为ownProps.filter, filter由`App`而来, `App`中的`filter`由react-router传进来
+- webpackDevServer historyApiFallback true
