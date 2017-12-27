@@ -23,7 +23,7 @@ const delay = ms =>
     new Promise(resolve => setTimeout(resolve, ms));
 // eslint-disable-next-line
 export const fetchTodos = filter =>
-    delay(500).then(() => {
+    delay(5000).then(() => {
         switch (filter) {
         case 'all':
             return fakeDatabase.todos;

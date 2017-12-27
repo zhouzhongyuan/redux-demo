@@ -138,3 +138,9 @@ We will learn how to display the loading indicators while the data is being fetc
 We will learn about “thunks”—the most common way to write async action creators in Redux.
 
 实现了redux-thunk
+
+## 23 Avoiding Race Conditions with Thunks
+
+We will learn how Redux Thunk middleware lets us conditionally dispatch actions to avoid unnecessary network requests and potential race conditions
+
+为fetchTodos添加一个判断条件，是否正在fetching，如果是，不再dispatch。
