@@ -2,11 +2,6 @@ import { v4 } from 'node-uuid';
 import { getIsFetching } from '../reducers';
 import * as api from '../api';
 
-const requestTodos = filter => ({
-    type: 'REQUEST_TODOS',
-    filter,
-});
-
 export const addTodo = text => ({
     type: 'ADD_TODO',
     id: v4(),
@@ -18,19 +13,29 @@ export const toggleTodo = id => ({
     id,
 });
 
-const receiveTodos = (filter, response) => ({
-    type: 'RECEIVE_TODOS',
-    filter,
-    response,
-});
-
 export const fetchTodos = filter => (dispatch, getState) => {
     if (getIsFetching(getState(), filter)) {
         return Promise.resolve();
     }
-    dispatch(requestTodos(filter));
-    return api.fetchTodos(filter).then((response) => { // eslint-disable-line consistent-return
-        dispatch(receiveTodos(filter, response));
+    dispatch({
+        type: 'FETCH_TODOS_REQUEST',
+        filter,
     });
+    return api.fetchTodos(filter).then(
+        (response) => { // eslint-disable-line consistent-return
+            dispatch({
+                type: 'FETCH_TODOS_SUCCESS',
+                filter,
+                response,
+            });
+        },
+        (error) => {
+            dispatch({
+                type: 'FETCH_TODOS_FAILURE',
+                filter,
+                message: error.message || 'Something went wrong',
+            });
+        },
+    );
 };
 
