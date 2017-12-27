@@ -105,3 +105,9 @@ export const fetchTodos = filter =>
         receiveTodos(filter, response));
 ```
 - Add function `addPromiseSupportToDispatch`，用来解决action creator可能是同步也可能是**异步**
+
+## 17 The Middleware Chain
+
+We will learn how we can generalize(概括) wrapping dispatch() for different purposes into a concept called “middleware” that is widely available in the Redux ecosystem.
+
+引入了Middleware概念
