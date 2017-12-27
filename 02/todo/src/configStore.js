@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import todoApp from './reducers';
 
 const logger = store => (next) => {
@@ -22,21 +22,16 @@ const promise = store => next => (action) => {
     }
     return next(action);
 };
-const wrapDispatchWithMiddlewares = (store, middlesares) => {
-    // eslint-disable-next-line no-shadow
-    middlesares.slice().reverse().forEach((middlesares) => {
-        // eslint-disable-next-line no-param-reassign
-        store.dispatch = middlesares(store)(store.dispatch);
-    });
-};
 const configStore = () => {
-    const store = createStore(todoApp);
     const middlewares = [promise];
     if (process.env.NODE_ENV !== 'production') {
         middlewares.push(logger);
     }
 
-    wrapDispatchWithMiddlewares(store, middlewares);
+    const store = createStore(
+        todoApp,
+        applyMiddleware(...middlewares),
+    );
     return store;
 };
 
