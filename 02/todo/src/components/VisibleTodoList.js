@@ -4,7 +4,6 @@ import { withRouter } from 'react-router';
 import TodoList from './TodoList';
 import * as actions from '../actions';
 import { getVisibleTodos } from '../reducers';
-import { fetchTodos } from '../api';
 
 class VisibleTodoList extends Component { // elsint-disable
     componentDidMount() {
@@ -16,10 +15,8 @@ class VisibleTodoList extends Component { // elsint-disable
         }
     }
     fetchData() {
-        const { filter, receiveTodos } = this.props;
-        fetchTodos(filter).then((todos) => {
-            receiveTodos(filter, todos);
-        });
+        const { filter, fetchTodos } = this.props;
+        fetchTodos(filter);
     }
     render() {
         const { toggleTodo, ...rest } = this.props;

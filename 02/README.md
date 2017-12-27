@@ -78,3 +78,30 @@ return returnValue;
 Dan写代码水平高！
 
 13 删除localStorage相关代码，添加fake backend
+
+
+16 Wrapping dispatch() to Recognize Promises
+
+**问题：**
+
+```javascript
+// VisibleTodoList.js
+
+fetchTodos(filter).then((todos) => {
+    receiveTodos(filter, todos);
+});
+```
+这段代码不是那么useful，因为
+- 每当我调用这段代码的时候，我都会首先fetchTodos
+- `fetchTodos`和`receiveTodos`接受同样的的参数`filter`
+
+如果我们能够把这段代码放到 a single action creator, 会更好。
+
+**修改：**
+- 添加 active creator `fetchTodos`(异步)
+```javascript
+export const fetchTodos = filter =>
+    api.fetchTodos(filter).then(response =>
+        receiveTodos(filter, response));
+```
+- Add function `addPromiseSupportToDispatch`，用来解决action creator可能是同步也可能是**异步**
