@@ -115,7 +115,12 @@ We will learn how we can generalize(概括) wrapping dispatch() for different pu
 关于middleware顺序:
 > it would be more natural to specify the order in which the action propagates through the middlewares.
 
-# 18 Applying Redux Middleware
+## 18 Applying Redux Middleware
 
 We will learn how to replace the middleware we wrote and the custom code we used to glue it together with the existing core and third party utilities.
 
+## 19 Updating the State with the Fetched Data
+
+We will learn how moving the source of truth for the data to the server changes the state shape and the reducers in our app.
+
+把所有的内容
