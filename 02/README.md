@@ -111,3 +111,6 @@ export const fetchTodos = filter =>
 We will learn how we can generalize(概括) wrapping dispatch() for different purposes into a concept called “middleware” that is widely available in the Redux ecosystem.
 
 引入了Middleware概念
+
+关于middleware顺序:
+> it would be more natural to specify the order in which the action propagates through the middlewares.
