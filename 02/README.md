@@ -144,3 +144,9 @@ We will learn about “thunks”—the most common way to write async action cre
 We will learn how Redux Thunk middleware lets us conditionally dispatch actions to avoid unnecessary network requests and potential race conditions
 
 为fetchTodos添加一个判断条件，是否正在fetching，如果是，不再dispatch。
+
+
+## 27 Updating Data on the Server
+
+We will learn how to wait until the item is updated on the server, and then update the corresponding local state.
+
