@@ -16,7 +16,7 @@ class VisibleTodoList extends Component { // elsint-disable
     }
     fetchData() {
         const { filter, fetchTodos } = this.props;
-        fetchTodos(filter);
+        fetchTodos(filter).then(() => console.log('done'));
     }
     render() {
         const { toggleTodo, todos, isFetching } = this.props;
