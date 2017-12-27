@@ -132,3 +132,9 @@ We will learn how to remove the duplication in our reducer files and how to keep
 ## 21 Displaying Loading Indicators
 
 We will learn how to display the loading indicators while the data is being fetched.
+
+## 22 Dispatching Actions Asynchronously with Thunks
+
+We will learn about “thunks”—the most common way to write async action creators in Redux.
+
+实现了redux-thunk
